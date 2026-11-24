@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Missão Canal do Pedro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday learning, falando direto com um iniciante, animado mas claro
+   IDEA o mapa de fases de um videogame: cada módulo é uma fase, o canal no ar é o chefão final
+   PICTURE mapa ilustrado com trilha sinuosa, 8 fases, morros, sol e a bandeira de chegada
+   COLOUR fundo branco, laranja-tomate dominante, verde-água de apoio, amarelo-sol de destaque
+   TYPE Baloo 2 para títulos, Nunito para texto
+   LAYOUT faixa laranja com título no topo e mapa em largura total; no celular o mapa vira vertical */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#16131f);--ink:light-dark(#1d1a2b,#f4f1ea);--soft:light-dark(#5b566e,#bdb7cc);--tom:#ff5a36;--tomd:light-dark(#e6431f,#ff7a5c);--sea:light-dark(#00968f,#2ec4b6);--sun:#ffd23f;--card:light-dark(#fff7f2,#221d2e);--line:light-dark(#f1dfd5,#352e44);--sky:light-dark(#ffe9df,#241b2c)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Baloo 2",Nunito,sans-serif;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5.4vw,52px);font-weight:800}
+h2{font-size:clamp(28px,3.6vw,38px);font-weight:800;margin-bottom:10px}
+h3{font-size:24px;font-weight:800}
+p{margin:0 0 12px}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.hero{background:var(--tom);color:#fff;padding-bottom:0}
+.hero p.lead{font-size:19px;max-width:62ch;margin-top:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.18);border-radius:999px;padding:6px 14px;font-weight:700;font-size:15px;white-space:nowrap}
+.fig{position:relative;min-height:340px;margin-top:22px}
+.fig>svg{position:absolute;inset:0;width:100%;height:100%}
+#map{min-height:330px}
+.nav{display:flex;gap:8px;overflow-x:auto;padding:12px max(5vw,16px);background:var(--bg);border-bottom:1px solid var(--line)}
+.nav a{flex:none;color:var(--ink);text-decoration:none;font-weight:800;font-size:15px;padding:8px 14px;border-radius:999px;background:var(--card)}
+.nav a:hover,.nav a:focus-visible{background:var(--sun);color:#1d1a2b;outline:none}
+@media(min-width:900px){.nav{position:sticky;top:0;z-index:5}}
+.sub{color:var(--soft);max-width:66ch;font-size:18px;margin-bottom:22px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:16px}
+.know{background:var(--card);border-radius:20px;padding:20px;border:1px solid var(--line)}
+.know svg{width:64px;height:64px;display:block;margin-bottom:10px}
+.know h3{font-size:22px;margin-bottom:8px}
+.know p{font-size:16px}
+.big{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:30px;color:var(--tomd);line-height:1;white-space:nowrap}
+.moral{margin-top:18px;background:var(--sun);color:#1d1a2b;border-radius:20px;padding:18px 22px;font-size:18px;font-weight:600}
+.phases{display:grid;gap:18px}
+.ph{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,300px);gap:22px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px}
+.badge{display:flex;flex-direction:column;align-items:center;gap:6px}
+.badge svg{width:96px;height:96px}
+.wk{font-weight:800;font-size:14px;color:var(--soft);white-space:nowrap}
+.ph ul{margin:8px 0 0;padding-left:20px}
+.ph li{margin-bottom:6px}
+.goal{color:var(--soft);margin:6px 0 0;font-size:16px}
+.mission{background:var(--bg);border:2px dashed var(--sea);border-radius:18px;padding:16px;align-self:start}
+.mission b{display:block;font-family:"Baloo 2",sans-serif;font-size:20px;color:var(--sea);margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font-size:14px;font-weight:700;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--sea) 16%,transparent);white-space:nowrap}
+.dict{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:12px}
+.dict div{border-left:5px solid var(--sun);padding:8px 14px;background:var(--card);border-radius:0 14px 14px 0}
+.dict b{font-family:"Baloo 2",sans-serif;font-size:20px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:"Baloo 2",sans-serif;font-size:18px}
+td:first-child{font-weight:800;white-space:nowrap}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px}
+.rule{display:flex;gap:14px;align-items:flex-start;background:var(--card);border-radius:18px;padding:16px;border:1px solid var(--line)}
+.rule .x{flex:none;width:40px;height:40px;border-radius:50%;background:var(--tom);color:#fff;display:grid;place-items:center;font-weight:800;font-size:22px}
+.rule .ok{background:var(--sea)}
+.check{display:grid;gap:10px;max-width:760px}
+.check label{display:flex;gap:14px;align-items:center;min-height:52px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 16px;cursor:pointer;font-weight:600}
+.check input{width:26px;height:26px;accent-color:var(--sea);flex:none}
+.check input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.prog{display:flex;align-items:center;gap:14px;margin:6px 0 18px;max-width:760px}
+.bar{flex:1;height:18px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--sea);border-radius:99px;transition:width .4s}
+.pct{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:24px;white-space:nowrap}
+.coach{background:var(--sea);color:#fff}
+.coach p{max-width:70ch;font-size:18px}
+.src a{color:var(--tomd);font-weight:700}
+.src li{margin-bottom:8px}
+footer{padding:24px max(5vw,16px);color:var(--soft);font-size:14px;border-top:1px solid var(--line)}
+@media(max-width:760px){.ph{grid-template-columns:minmax(0,1fr)}.badge{flex-direction:row;justify-content:flex-start}.badge svg{width:64px;height:64px}}
+@media(prefers-reduced-motion:reduce){.bar i{transition:none}#runner{display:none}}
+</style>
+</head>
+<body>
+
+<header class="band hero">
+<div class="wrap">
+<h1>Missão: criar o canal de animações do Pedro</h1>
+<p class="lead">Um caminho em 8 fases para sair do zero e chegar ao primeiro episódio pronto. Cada fase ensina uma coisa e termina com uma missão prática. Sem pressa e sem pular fase.</p>
+<div class="tags"><span class="tag">10 semanas</span><span class="tag">Cerca de 6 horas por semana</span><span class="tag">Começando do zero</span><span class="tag">Desenhos para crianças</span></div>
+<div class="fig" id="map" role="img" aria-label="Mapa com as 8 fases do roteiro, do início até o canal no ar"><svg id="mapsvg"></svg></div>
+</div>
+</header>
+
+<nav class="nav" aria-label="Seções">
+<a href="#saber">Antes de começar</a><a href="#fases">As 8 fases</a><a href="#palavras">Dicionário</a><a href="#ferramentas">Ferramentas</a><a href="#regras">Regras de ouro</a><a href="#pronto">Estou pronto?</a><a href="#fontes">Fontes</a>
+</nav>
+
+<section class="band" id="saber">
+<div class="wrap">
+<h2>4 coisas que você precisa saber antes de começar</h2>
+<p class="sub">Isso não é para desanimar, é para você jogar sabendo as regras do jogo. Quem conhece as regras não perde o canal depois de meses de trabalho.</p>
+<div class="grid4" id="know"></div>
+<div class="moral">Resumindo: a IA é a sua câmera e o seu estúdio, mas a ideia, os personagens e as histórias têm que ser seus. É isso que faz o canal crescer e ganhar dinheiro.</div>
+</div>
+</section>
+
+<section class="band" id="fases" style="background:var(--sky)">
+<div class="wrap">
+<h2>As 8 fases</h2>
+<p class="sub">Cada fase tem o que você vai aprender e uma missão. Só passe para a próxima quando a missão estiver feita.</p>
+<div class="phases" id="phases"></div>
+</div>
+</section>
+
+<section class="band" id="palavras">
+<div class="wrap">
+<h2>Dicionário do criador</h2>
+<p class="sub">Palavras que você vai ouvir o tempo todo, explicadas sem complicação.</p>
+<div class="dict" id="dict"></div>
+</div>
+</section>
+
+<section class="band" id="ferramentas" style="background:var(--sky)">
+<div class="wrap">
+<h2>Sua caixa de ferramentas</h2>
+<p class="sub">Comece pelas versões grátis. Só pague por uma ferramenta quando tiver certeza de que ela funciona para você. Preços e ferramentas mudam rápido, então confira de tempos em tempos.</p>
+<div class="scroll"><table>
+<thead><tr><th>Para quê</th><th>Ferramentas</th><th>Fique de olho</th></tr></thead>
+<tbody id="tools"></tbody>
+</table></div>
+</div>
+</section>
+
+<section class="band" id="regras">
+<div class="wrap">
+<h2>Regras de ouro para vídeos de criança</h2>
+<p class="sub">Pais e o YouTube são exigentes com conteúdo infantil. Seguir isso protege as crianças e protege o seu canal.</p>
+<div class="rules" id="rules"></div>
+</div>
+</section>
+
+<section class="band" id="pronto" style="background:var(--sky)">
+<div class="wrap">
+<h2>Estou pronto para produzir?</h2>
+<p class="sub">Marque cada item quando conseguir fazer. Com tudo marcado, é hora de ligar a câmera (ou melhor, a IA).</p>
+<div class="prog"><div class="bar"><i id="barfill"></i></div><span class="pct" id="pct">0 de 8</span></div>
+<div class="check" id="check"></div>
+</div>
+</section>
+
+<section class="band coach">
+<div class="wrap">
+<h2>Como vamos acompanhar</h2>
+<p>Toda semana, um papo de 30 minutos com o tio Bruno para mostrar a missão da fase, tirar dúvidas e combinar a próxima. Se uma fase demorar mais, tudo bem: é melhor gastar uma semana a mais do que pular etapa. O primeiro episódio vai mostrar o nível do canal inteiro.</p>
+</div>
+</section>
+
+<section class="band src" id="fontes">
+<div class="wrap">
+<h2>Fontes oficiais</h2>
+<p class="sub">Regras conferidas em novembro de 2026. Vale ler as páginas do YouTube na Fase 1.</p>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/72851?hl=pt-BR">Requisitos do Programa de Parcerias do YouTube</a></li>
+<li><a href="https://blog.youtube/intl/pt-br/news-and-events/novas-oportunidades-e-mudancas-programa-de-parcerias-do-youtube/">Mudanças no Programa de Parcerias a partir de 2027</a></li>
+<li><a href="https://support.google.com/youtube/answer/1311392">Políticas de monetização e conteúdo inautêntico</a></li>
+<li><a href="https://support.google.com/youtube/answer/10774223">Princípios de qualidade para conteúdo infantil</a></li>
+<li><a href="https://support.google.com/youtube/answer/14328491">Quando avisar que o vídeo usa IA</a></li>
+</ul>
+</div>
+</section>
+
+<footer>Roteiro de estudos montado por Bruno para o Pedro, novembro de 2026.</footer>
+
+<script>
+{
+const C={tom:'#ff5a36',sea:'#00968f',sun:'#ffd23f',ink:'#1d1a2b',sky:'#ffb59f'};
+const icons={
+play:`<rect x="8" y="16" width="48" height="34" rx="9" fill="${C.tom}"/><path d="M27 25v16l13-8z" fill="#fff"/><rect x="18" y="52" width="28" height="4" rx="2" fill="${C.ink}" opacity=".3"/>`,
+pencil:`<rect x="10" y="10" width="34" height="44" rx="5" fill="#fff" stroke="${C.ink}" stroke-width="2.5"/><path d="M17 21h20M17 29h20M17 37h12" stroke="${C.ink}" stroke-width="2.5" stroke-linecap="round"/><path d="M50 18l6 6-20 20-8 2 2-8z" fill="${C.sun}" stroke="${C.ink}" stroke-width="2"/>`,
+paint:`<path d="M32 8C17 8 7 19 7 32c0 12 9 22 20 22 5 0 6-4 4-7-2-4 0-7 5-7h6c8 0 15-6 15-15C57 15 46 8 32 8z" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><circle cx="20" cy="27" r="4" fill="${C.tom}"/><circle cx="31" cy="19" r="4" fill="${C.sea}"/><circle cx="43" cy="24" r="4" fill="${C.ink}"/>`,
+film:`<rect x="8" y="22" width="48" height="32" rx="4" fill="${C.ink}"/><path d="M8 12l46-6 2 12-46 6z" fill="#fff" stroke="${C.ink}" stroke-width="2.5"/><path d="M18 10l6 9M30 8l6 9M42 7l6 9" stroke="${C.ink}" stroke-width="3"/><circle cx="32" cy="38" r="8" fill="${C.tom}"/>`,
+music:`<path d="M24 46V14l26-6v32" fill="none" stroke="${C.ink}" stroke-width="4"/><ellipse cx="18" cy="47" rx="8" ry="6" fill="${C.sea}"/><ellipse cx="44" cy="41" rx="8" ry="6" fill="${C.tom}"/>`,
+scissors:`<circle cx="18" cy="44" r="8" fill="none" stroke="${C.tom}" stroke-width="4"/><circle cx="18" cy="20" r="8" fill="none" stroke="${C.sea}" stroke-width="4"/><path d="M25 24l29 18M25 40l29-18" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>`,
+mega:`<path d="M10 26h10l24-14v40L20 38H10z" fill="${C.tom}" stroke="${C.ink}" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 38l4 14h7l-3-14" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><path d="M50 24c3 2 3 14 0 16" stroke="${C.ink}" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+chart:`<rect x="10" y="36" width="10" height="18" rx="2" fill="${C.sea}"/><rect x="26" y="26" width="10" height="28" rx="2" fill="${C.sun}"/><rect x="42" y="12" width="10" height="42" rx="2" fill="${C.tom}"/><path d="M8 56h48" stroke="${C.ink}" stroke-width="3" stroke-linecap="round"/>`,
+coin:`<circle cx="32" cy="32" r="22" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><circle cx="32" cy="32" r="15" fill="none" stroke="${C.ink}" stroke-width="2" opacity=".4"/><text x="32" y="40" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="22" fill="${C.ink}">R$</text>`,
+copy:`<rect x="8" y="12" width="28" height="34" rx="5" fill="${C.sea}"/><rect x="18" y="18" width="28" height="34" rx="5" fill="${C.sea}" opacity=".7"/><rect x="28" y="24" width="28" height="34" rx="5" fill="${C.tom}"/><path d="M36 36l12 12M48 36L36 48" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`,
+kid:`<circle cx="32" cy="22" r="12" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><circle cx="28" cy="21" r="1.8" fill="${C.ink}"/><circle cx="36" cy="21" r="1.8" fill="${C.ink}"/><path d="M28 26c2 2 6 2 8 0" stroke="${C.ink}" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M14 56c0-12 8-18 18-18s18 6 18 18z" fill="${C.tom}"/>`,
+tag:`<rect x="8" y="14" width="48" height="36" rx="8" fill="#fff" stroke="${C.ink}" stroke-width="2.5"/><text x="32" y="38" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="18" fill="${C.sea}">IA</text><circle cx="50" cy="14" r="7" fill="${C.sun}" stroke="${C.ink}" stroke-width="2"/>`
+};
+const ico=(k,s=64)=>`<svg viewBox="0 0 64 64" width="${s}" height="${s}" aria-hidden="true">${icons[k]}</svg>`;
+
+const know=[
+{i:'coin',t:'Monetizar ficou mais difícil',n:'8.000 horas',d:'Para o YouTube começar a pagar, o canal precisa de 1.000 inscritos. A partir de 1º de fevereiro de 2027 também vai precisar de 8.000 horas assistidas em um ano (ou 20 milhões de visualizações em Shorts em 3 meses). Antes eram 4.000 horas. Como você vai lançar perto dessa data, já entra na regra nova.'},
+{i:'copy',t:'Vídeo de IA em série não ganha dinheiro',n:'Seja original',d:'O YouTube aceita vídeos feitos com IA. O que ele não paga é vídeo repetido, feito todo igual com só uma coisinha trocada. E ele avalia o canal inteiro: alguns vídeos assim podem tirar o dinheiro de todos.'},
+{i:'kid',t:'Vídeo infantil paga menos',n:'Mais visualizações',d:'Vídeos marcados como "para crianças" não têm anúncios personalizados nem comentários. Por isso cada mil visualizações rende menos do que em outros temas. E canais infantis de baixa qualidade podem ser cortados do programa que paga os criadores.'},
+{i:'tag',t:'Quando avisar que usou IA',n:'Só se parecer real',d:'Desenho animado normalmente não precisa do aviso de "conteúdo alterado ou sintético". O aviso é obrigatório quando algo parece real, como uma pessoa, um lugar ou um acontecimento de verdade.'}
+];
+document.getElementById('know').innerHTML=know.map(k=>`<article class="know">${ico(k.i)}<h3>${k.t}</h3><div class="big">${k.n}</div><p style="margin-top:10px">${k.d}</p></article>`).join('');
+
+const ph=[
+{i:'play',s:'Fase 1',w:'Semana 1',t:'Conhecer o YouTube por dentro',short:'Conhecer o YouTube',g:'Entender como o YouTube escolhe quais vídeos mostrar e o que as crianças gostam de assistir.',l:['Como o YouTube recomenda vídeos: quantas pessoas clicam e por quanto tempo assistem é o que mais conta','Explorar o YouTube Studio, o "painel de controle" do canal','Ler as regras do YouTube para vídeos infantis e para conteúdo repetitivo','Assistir canais de sucesso, como Galinha Pintadinha e Mundo Bita, e alguns canais menores feitos com IA, prestando atenção em duração, títulos e capas'],m:'Montar uma tabela comparando 10 canais: para quem é, quanto dura cada vídeo, de quanto em quanto tempo posta e o que você faria diferente.',c:['YouTube Studio','Planilha']},
+{i:'pencil',s:'Fase 2',w:'Semana 2',t:'Criar histórias e personagens',short:'Histórias',g:'Escrever histórias que prendem a atenção das crianças e que sejam suas, não da IA.',l:['Escolher a idade do público: 2 a 4 anos e 5 a 8 anos pedem jeitos diferentes de contar','O esqueleto de uma boa história curta: apresentação, problema, tentativa, solução e lição','O que crianças adoram: repetição, músicas com refrão, perguntas para elas responderem, personagens marcantes','Usar a IA para ter ideias e revisar o texto, mas com a ideia principal sendo sua','Montar a "bíblia do canal": o nome, o mundo onde tudo acontece, os personagens e o jeito de cada um'],m:'Bíblia do canal pronta e 3 roteiros de 2 a 3 minutos.',c:['ChatGPT','Claude','Gemini']},
+{i:'paint',s:'Fase 3',w:'Semanas 3 e 4',t:'Desenhar com IA',short:'Desenhar com IA',g:'Criar imagens com um estilo seu e fazer o personagem sair igual em todos os vídeos. Esse é o maior desafio do nicho.',l:['Como escrever um bom pedido (prompt) para imagem: estilo, enquadramento, luz e cores','Escolher um estilo visual fixo e guardar os prompts que funcionaram','Fazer a ficha do personagem: de frente, de lado e com várias expressões','Usar imagens de referência para o personagem não mudar de cara','Conferir se a ferramenta deixa usar as imagens para ganhar dinheiro'],m:'Ficha de 3 personagens, cada um com 5 expressões, e 20 cenários no mesmo estilo.',c:['Midjourney','Leonardo.Ai','ChatGPT','Gemini']},
+{i:'film',s:'Fase 4',w:'Semanas 5 e 6',t:'Fazer as imagens se mexerem',short:'Animar',g:'Transformar as imagens paradas em cenas animadas.',l:['O básico de animação: tipos de plano, movimento de câmera e ritmo','Storyboard: desenhar o episódio cena por cena antes de gerar qualquer vídeo','Ferramentas que transformam imagem em vídeo, comparando qualidade, preço e duração máxima de cada clipe','Fazer a boca do personagem acompanhar a fala ou a música','Organizar os arquivos em pastas por episódio e por cena'],m:'Uma cena de 30 segundos animada, usando um dos roteiros da Fase 2.',c:['Kling','Runway','Google Veo','Hailuo']},
+{i:'music',s:'Fase 5',w:'Semanas 6 e 7',t:'Voz, música e barulhinhos',short:'Voz e música',g:'Dar vida ao vídeo com narração, trilha e efeitos sonoros.',l:['Narração: gravar com a sua própria voz ou usar uma voz feita por IA. Nunca copie a voz de alguém sem autorização','Música: escrever letras suas e gerar a melodia com IA, conferindo se o plano permite ganhar dinheiro com ela','Efeitos sonoros: usar a Biblioteca de Áudio do YouTube e bancos gratuitos com licença clara','Mixagem: a voz sempre mais alta que a música e nada de chiado'],m:'Som completo de um episódio: narração, música e efeitos.',c:['ElevenLabs','Suno','Biblioteca de Áudio do YouTube']},
+{i:'scissors',s:'Fase 6',w:'Semanas 7 e 8',t:'Editar o episódio',short:'Editar',g:'Juntar tudo em um episódio completo, com ritmo e bom acabamento.',l:['Escolher um editor: CapCut é mais fácil, DaVinci Resolve é grátis e mais completo','Cortes, transições, legendas, textos na tela e ajuste de cor','Ritmo de vídeo infantil: cenas curtas, sem silêncios longos e nada assustador','Exportar deitado (16:9) para vídeos longos e em pé (9:16) para Shorts','Revisar quadro a quadro: a IA às vezes erra mãos, rostos e objetos'],m:'Episódio piloto completo de 2 a 4 minutos.',c:['CapCut','DaVinci Resolve']},
+{i:'mega',s:'Fase 7',w:'Semana 9',t:'Deixar o vídeo irresistível',short:'Capa e título',g:'Fazer o vídeo ser encontrado e clicado.',l:['Títulos e descrições com as palavras que os pais pesquisam, sem enganar ninguém','Thumbnail (a capa do vídeo): personagem com expressão forte, cores vivas, pouco texto','Montar o canal: nome, banner, foto e playlists por tema','Marcar certo a opção "conteúdo para crianças" e, quando for o caso, o aviso de IA','Mostrar as capas para pessoas de verdade e ver qual chama mais atenção'],m:'Canal configurado e 3 versões de capa testadas para o piloto.',c:['Canva','YouTube Studio']},
+{i:'chart',s:'Fase 8',w:'Semana 10',t:'Pensar como dono do canal',short:'Plano do canal',g:'Planejar a rotina do canal e outras formas de ganhar dinheiro.',l:['Os números que importam: quanto tempo assistem, quantos clicam e quantos se inscrevem','Calendário realista, por exemplo 1 episódio e 2 ou 3 Shorts por semana','Custos: começar no grátis e assinar no máximo 1 ou 2 ferramentas','Outras rendas: músicas nas plataformas de streaming, livrinhos com os personagens, parcerias com escolas ou marcas educativas','Guardar todos os arquivos originais e, no futuro, pensar em registrar a marca do canal no INPI'],m:'Plano de 3 meses e 3 episódios prontos antes de lançar o canal.',c:['Planilha','YouTube Analytics']}
+];
+document.getElementById('phases').innerHTML=ph.map((p,n)=>`<article class="ph"><div class="badge">${ico(p.i,96)}<span class="wk">${p.w}</span></div><div><h3>${p.s}: ${p.t}</h3><p class="goal">${p.g}</p><ul>${p.l.map(x=>`<li>${x}</li>`).join('')}</ul><div class="chips">${p.c.map(x=>`<span class="chip">${x}</span>`).join('')}</div></div><div class="mission"><b>Missão da fase</b>${p.m}</div></article>`).join('');
+
+const dict=[
+['Prompt','O pedido que você escreve para a IA. Quanto mais claro e detalhado, melhor o resultado.'],
+['Thumbnail','A capa do vídeo, a imagem que aparece antes de alguém clicar.'],
+['CTR','De cada 100 pessoas que veem a capa, quantas clicam.'],
+['Retenção','Quanto do vídeo as pessoas assistem antes de sair.'],
+['Monetizar','Começar a receber dinheiro do YouTube pelos anúncios.'],
+['RPM','Quanto o canal recebe a cada mil visualizações.'],
+['Storyboard','Os desenhos do vídeo cena por cena, como uma história em quadrinhos do episódio.'],
+['Shorts','Vídeos curtos e em pé, de até 3 minutos.'],
+['Bíblia do canal','O documento com tudo sobre o seu mundo: personagens, cenários, jeito de falar e regras.']
+];
+document.getElementById('dict').innerHTML=dict.map(d=>`<div><b>${d[0]}</b><br>${d[1]}</div>`).join('');
+
+const tools=[
+['Escrever roteiro','ChatGPT, Claude, Gemini','Use como ajudante, não para escrever tudo'],
+['Criar imagens','Midjourney, Leonardo.Ai, ChatGPT, Gemini','Confira se pode usar para ganhar dinheiro'],
+['Animar','Kling, Runway, Google Veo, Hailuo','É a parte mais cara: teste antes de assinar'],
+['Voz','Sua própria voz, ElevenLabs','Nunca copie a voz de alguém sem autorização'],
+['Música','Letras suas, Suno','O plano grátis costuma proibir uso comercial'],
+['Editar','CapCut, DaVinci Resolve','O DaVinci é grátis'],
+['Capas','Canva','O plano grátis dá conta no começo']
+];
+document.getElementById('tools').innerHTML=tools.map(t=>`<tr><td>${t[0]}</td><td>${t[1]}</td><td>${t[2]}</td></tr>`).join('');
+
+const rules=[
+[0,'Nada de personagens famosos','Peppa, Patrulha Canina e afins têm dono. Usar isso é violar direitos autorais e pode derrubar o canal.'],
+[0,'Nada estranho ou assustador','A IA às vezes cria coisas esquisitas sem querer. Assista tudo pensando: uma criança de 3 anos ficaria bem vendo isso?'],
+[0,'Nada de vídeo de forminha','Mesmo vídeo com só a cor ou o nome trocados é exatamente o que o YouTube não paga.'],
+[1,'Mensagens do bem','Amizade, cuidado, curiosidade e aprendizado. É o que os pais procuram e o que o YouTube recomenda.'],
+[1,'Qualidade sempre igual','Melhor postar menos e manter o nível do que postar muito e cair a qualidade.'],
+[1,'Seu toque em tudo','Personagens, histórias e músicas seus são o que diferencia o canal dos outros milhares feitos com IA.']
+];
+document.getElementById('rules').innerHTML=rules.map(r=>`<div class="rule"><span class="x ${r[0]?'ok':''}" aria-hidden="true">${r[0]?'✓':'×'}</span><div><b>${r[1]}</b><br>${r[2]}</div></div>`).join('');
+
+const items=['Li as regras do YouTube para vídeos infantis e conteúdo repetitivo','Tenho a bíblia do canal com os personagens definidos','Consigo gerar meus personagens sempre com a mesma cara','Fiz uma cena animada que ficou boa','Tenho música e som que posso usar para ganhar dinheiro','Editei um episódio completo sozinho','Meu canal está configurado com nome, banner e capas','Tenho 3 episódios prontos e um calendário de postagem'];
+let saved=[];try{saved=JSON.parse(localStorage.getItem('pedro-check')||'[]')}catch(e){}
+const ck=document.getElementById('check');
+ck.innerHTML=items.map((t,n)=>`<label for="c${n}"><input type="checkbox" id="c${n}" ${saved.includes(n)?'checked':''}>${t}</label>`).join('');
+const upd=()=>{const on=[...ck.querySelectorAll('input')].map((x,n)=>x.checked?n:-1).filter(n=>n>=0);document.getElementById('barfill').style.width=(on.length/items.length*100)+'%';document.getElementById('pct').textContent=on.length+' de '+items.length;try{localStorage.setItem('pedro-check',JSON.stringify(on))}catch(e){}};
+ck.addEventListener('change',upd);upd();
+
+const s=document.getElementById('mapsvg');
+const draw=()=>{
+const W=s.clientWidth,H=s.clientHeight;if(!W)return;
+const vert=W<640;const n=ph.length;let pts=[];
+if(vert){const top=40,bot=H-70;for(let k=0;k<n;k++){const y=top+(bot-top)*k/(n-1);pts.push([k%2?W*0.62:W*0.26,y])}}
+else{const l=70,r=W-150;for(let k=0;k<n;k++){const x=l+(r-l)*k/(n-1);pts.push([x,k%2?H*0.42:H*0.66])}}
+const end=vert?[W*0.44,H-24]:[W-60,H*0.38];
+const all=[...pts,end];
+let d=`M${all[0][0]},${all[0][1]}`;
+for(let k=1;k<all.length;k++){const a=all[k-1],b=all[k];if(vert){const my=(a[1]+b[1])/2;d+=` C${a[0]},${my} ${b[0]},${my} ${b[0]},${b[1]}`}else{const mx=(a[0]+b[0])/2;d+=` C${mx},${a[1]} ${mx},${b[1]} ${b[0]},${b[1]}`}}
+let hills='';
+const hc=['rgba(255,255,255,.14)','rgba(255,255,255,.22)'];
+hills+=`<path d="M0,${H*0.55} Q${W*0.2},${H*0.3} ${W*0.42},${H*0.5} T${W},${H*0.45} V${H} H0z" fill="${hc[0]}"/>`;
+hills+=`<path d="M0,${H*0.78} Q${W*0.3},${H*0.6} ${W*0.6},${H*0.75} T${W},${H*0.7} V${H} H0z" fill="${hc[1]}"/>`;
+const sunX=vert?W-50:W*0.5,sunY=vert?40:46;
+let out=`<circle cx="${sunX}" cy="${sunY}" r="28" fill="${C.sun}"/><circle cx="${sunX}" cy="${sunY}" r="40" fill="${C.sun}" opacity=".25"/>`+hills;
+out+=`<path d="${d}" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="22" stroke-linecap="round" transform="translate(0,5)"/><path d="${d}" fill="none" stroke="#fff4d6" stroke-width="18" stroke-linecap="round"/><path id="trail" d="${d}" fill="none" stroke="${C.tom}" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round"/>`;
+pts.forEach((p,k)=>{
+const [x,y]=p;const lab=ph[k].short;
+out+=`<ellipse cx="${x}" cy="${y+22}" rx="22" ry="6" fill="rgba(0,0,0,.18)"/><circle cx="${x}" cy="${y}" r="24" fill="${k%2?C.sea:'#fff'}" stroke="${C.ink}" stroke-width="3"/><text x="${x}" y="${y+8}" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="22" fill="${k%2?'#fff':C.ink}">${k+1}</text>`;
+if(vert){out+=`<text x="${k%2?x-34:x+34}" y="${y+6}" text-anchor="${k%2?'end':'start'}" font-family="Nunito,sans-serif" font-weight="800" font-size="15" fill="#fff" style="paint-order:stroke;stroke:${C.tom};stroke-width:4px">${lab}</text>`}
+else{const ly=k%2?y-36:y+48;out+=`<text x="${x}" y="${ly}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="15" fill="#fff" style="paint-order:stroke;stroke:${C.tom};stroke-width:4px">${lab}</text>`}
+});
+const [ex,ey]=end;
+out+=`<path d="M${ex},${ey+10} V${ey-52}" stroke="${C.ink}" stroke-width="4"/><path d="M${ex},${ey-52} l40,10 -40,12z" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5" stroke-linejoin="round"/><circle cx="${ex}" cy="${ey+10}" r="10" fill="${C.ink}"/>`;
+out+=`<text x="${vert?ex+22:ex}" y="${vert?ey+4:ey+40}" text-anchor="${vert?'start':'middle'}" font-family="Baloo 2,sans-serif" font-weight="800" font-size="18" fill="#fff" style="paint-order:stroke;stroke:${C.ink};stroke-width:4px">Canal no ar!</text>`;
+out+=`<g id="runner"><circle r="9" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><path d="M-3,-4v8l7,-4z" fill="${C.ink}"/><animateMotion dur="9s" repeatCount="indefinite" rotate="0"><mpath href="#trail"/></animateMotion></g>`;
+s.setAttribute('viewBox',`0 0 ${W} ${H}`);
+s.innerHTML=out;
+};
+const box=document.getElementById('map');
+const sizeMap=()=>{box.style.minHeight=(box.clientWidth<640?'560px':'330px')};
+const ro=new ResizeObserver(()=>{sizeMap();draw()});ro.observe(box);
+sizeMap();draw();
+}
+</script>
+</body>
+</html>
